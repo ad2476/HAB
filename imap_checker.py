@@ -3,12 +3,9 @@ import email # for parsing emails
 import getpass # for password field input
 import os
 
-
-def connect(user, passwd):
+def auth(user, passwd):
 	mailserver = imaplib.IMAP4_SSL('imap.gmail.com', 993)
 	mailserver.login(user, passwd)
-	
-	mailserver.select("INBOX") # connect to inbox
 	
 	return mailserver
 
@@ -42,7 +39,8 @@ if __name__ == "__main__":
 	prompt = "Password for "+username+": "
 	password = getpass.getpass(prompt)
 	
-	gmail = connect(username, password)
+	gmail = auth(username, password)
+	gmail.select("INBOX") # connect to inbox
 	
 	try:
 		while True:
