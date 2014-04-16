@@ -1,4 +1,4 @@
-HAB Research Project
+High-Altitude Balloon
 ===
 ###### Arun Drelich
 
