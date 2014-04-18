@@ -9,6 +9,7 @@ TinyGPS gps;
 SoftwareSerial GPS(GPSRX, GPSTX);
 SerialGSM cell(GSMRX,GSMTX); // RX, TX
 
+int time=0; // Time in seconds
 
 // Packs all relevant GPS data into a logging string for OpenLog and SMS
 void packGPSdata(char* strbuf) {
@@ -41,8 +42,8 @@ void setup()
   cell.Boot();
   cell.checkSignalQuality();
   cell.FwdSMS2Serial();
-  cell.Rcpt(F("+12035391858"));
-  cell.Message(F("Program begins now!"));
+  cell.Rcpt(RCPT);
+  cell.Message("Program begins now!");
   cell.SendSMS();
   
   delay(30000); // Wait 30s for things to clear
@@ -51,11 +52,10 @@ void setup()
 void loop()
 {
   char GPSbuf[80];
-  //int time=0; // Time in seconds
         
   // For two seconds we parse GPS data and report some key values
   GPS.listen(); // Listen on the GPS serial
-  for (unsigned long start = millis(); millis() - start < 1000;)
+  for (unsigned long start = millis(); millis() - start < 15000;)
   {
     while (GPS.available())
     {
@@ -66,14 +66,15 @@ void loop()
       }
     }
   }
-  
   Serial.println(GPSbuf);
   
-  /*
+  
   time+=15;
   // Send a text every 60 seconds
   if (time%60==0) {
-    
-  } */
+    cell.listen();
+    cell.Message(GPSbuf);
+    cell.SendSMS();
+  }
    
 }
