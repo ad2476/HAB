@@ -10,7 +10,7 @@ def auth(user, passwd):
 	return mailserver
 
 
-# Gets the latest unread email from GSM module
+# Gets the first unread email from GSM module
 def getMail(mail):	 
 	result, data = mail.uid('search', None, '(HEADER Subject "SMS from (917) 754-8985") (UNSEEN)') # search and return uids instead
 	id_list=data[0].split()
@@ -18,8 +18,8 @@ def getMail(mail):
 		print "No new mails!"
 		raw_email = ""
 	else:
-		latest_email_uid = id_list[len(id_list)-1]
-		result, data = mail.uid('fetch', latest_email_uid, '(RFC822)')
+		first_email_uid = id_list[0]
+		result, data = mail.uid('fetch', first_email_uid, '(RFC822)')
 		raw_email = data[0][1]
 	
 	return raw_email
@@ -40,10 +40,10 @@ if __name__ == "__main__":
 	password = getpass.getpass(prompt)
 	
 	gmail = auth(username, password)
-	gmail.select("INBOX") # connect to inbox
 	
 	try:
 		while True:
+			gmail.select("INBOX") # connect to inbox
 			raw = getMail(gmail)
 			message = parseMail(raw)
 	
