@@ -1,7 +1,8 @@
 import imaplib # for IMAP access
 import email # for parsing emails
 import getpass # for password field input
-import os
+from os import system
+import time
 
 def auth(user, passwd):
 	mailserver = imaplib.IMAP4_SSL('imap.gmail.com', 993)
@@ -15,7 +16,7 @@ def getMail(mail):
 	result, data = mail.uid('search', None, '(HEADER Subject "SMS from (917) 754-8985") (UNSEEN)') # search and return uids instead
 	id_list=data[0].split()
 	if len(id_list)==0:
-		print "No new mails!"
+		#print "No new mails!"
 		raw_email = ""
 	else:
 		first_email_uid = id_list[0]
@@ -33,7 +34,7 @@ def parseMail(raw_mail):
 	
 
 if __name__ == "__main__":
-	os.system("clear")
+	system("clear")
 	#username = raw_input("Enter username for imap.gmail.com: ")
 	username = "ad2476@gmail.com"
 	prompt = "Password for "+username+": "
@@ -42,13 +43,18 @@ if __name__ == "__main__":
 	gmail = auth(username, password)
 	
 	try:
+		t0 = time.time()
 		while True:
-			gmail.select("INBOX") # connect to inbox
-			raw = getMail(gmail)
-			message = parseMail(raw)
+			t1=time.time()
+			if t1-t0==10.0:
+				gmail.select("INBOX") # connect to inbox
+				raw = getMail(gmail)
+				message = parseMail(raw)
 	
-			print message.get_payload()
-			cont = raw_input("[ENTER]\n")
+				if message.get_payload() != "":
+					print message.get_payload()
+				t0=t1
+			
 	except:
 		pass
 		
