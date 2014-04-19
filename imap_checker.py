@@ -2,7 +2,7 @@ import imaplib # for IMAP access
 import email # for parsing emails
 import getpass # for password field input
 from os import system
-import time
+import time, sys
 
 def auth(user, passwd):
 	mailserver = imaplib.IMAP4_SSL('imap.gmail.com', 993)
@@ -49,9 +49,12 @@ if __name__ == "__main__":
 			message = parseMail(raw)
 
 			if message.get_payload() != "":
-				print message.get_payload() + "\b"
+				print ""
+				sys.stdout.write(message.get_payload())
+				sys.stdout.flush()
 			else:
-				print "."
+				sys.stdout.write(".")
+				sys.stdout.flush()
 			time.sleep(10)
 			
 	except:
