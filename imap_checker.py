@@ -4,6 +4,9 @@ import getpass # for password field input
 from os import system
 import time, sys
 
+LAT=0
+LON=1
+
 def auth(user, passwd):
 	mailserver = imaplib.IMAP4_SSL('imap.gmail.com', 993)
 	mailserver.login(user, passwd)
@@ -31,7 +34,23 @@ def parseMail(raw_mail):
 	
 	return msg
 	
-	
+# Parse the message payload to return a tuple of LAT/LON coordinates
+def parsePayload(message):
+	start = message.find("/") + 2
+	if start != 1: # The slash exists
+		end = message.find("/", start) - 1
+		if end != -2: # The second slash exists
+			raw_coords = message[start:end].split()
+			coords = []
+			for each in raw_coords:
+				coords.append(str(float(each)/(1.0e6)))
+		else:
+			return ("err", "err")
+
+	else:
+		return ("err", "err")
+
+	return tuple(coords)
 
 if __name__ == "__main__":
 	system("clear")
@@ -41,20 +60,28 @@ if __name__ == "__main__":
 	password = getpass.getpass(prompt)
 	
 	gmail = auth(username, password)
+
+	log = open("log.txt", "w") # Overwrite/create the log file
 	
 	try:
 		while True:
 			gmail.select("INBOX") # connect to inbox
 			raw = getMail(gmail)
 			message = parseMail(raw)
+			payload = str(message.get_payload())
 
-			if message.get_payload() != "":
+			if payload != "": # There's a new email
 				print ""
-				sys.stdout.write(message.get_payload())
+
+				coords = parsePayload(payload)
+				log.write(coords[LAT]+", "+coords[LON]+"\n")
+
+				sys.stdout.write(payload)
 				sys.stdout.flush()
 			else:
 				sys.stdout.write(".")
 				sys.stdout.flush()
+
 			time.sleep(10)
 			
 	except:
