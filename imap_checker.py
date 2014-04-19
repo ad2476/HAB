@@ -6,6 +6,7 @@ import time, sys
 
 LAT=0
 LON=1
+ALT=2
 
 def auth(user, passwd):
 	mailserver = imaplib.IMAP4_SSL('imap.gmail.com', 993)
@@ -41,16 +42,19 @@ def parsePayload(message):
 		end = message.find("/", start) - 1
 		if end != -2: # The second slash exists
 			raw_coords = message[start:end].split()
-			coords = []
-			for each in raw_coords:
-				coords.append(str(float(each)/(1.0e6)))
-		else:
-			return ("err", "err")
+			start = message.find("/", end)+2
+			if start != 1:
+				end = message.find("/", start)-1
+				if end != -2:
+					coords = []
+					for each in raw_coords:
+						coords.append(str(float(each)/(1.0e6)))
 
-	else:
-		return ("err", "err")
+					coords.append(str(float(message[start:end])/100.0))
 
-	return tuple(coords)
+					return tuple(coords)
+
+	return ("err", "err", "err")
 
 if __name__ == "__main__":
 	system("clear")
@@ -60,11 +64,11 @@ if __name__ == "__main__":
 	password = getpass.getpass(prompt)
 	
 	gmail = auth(username, password)
-
-	log = open("log.txt", "w") # Overwrite/create the log file
 	
 	try:
 		while True:
+			log = open("log.txt", "a") # Overwrite/create the log file
+
 			gmail.select("INBOX") # connect to inbox
 			raw = getMail(gmail)
 			message = parseMail(raw)
@@ -74,7 +78,7 @@ if __name__ == "__main__":
 				print ""
 
 				coords = parsePayload(payload)
-				log.write(coords[LAT]+", "+coords[LON]+"\n")
+				log.write(coords[LAT]+","+coords[LON]+","+coords[ALT]+"\n")
 
 				sys.stdout.write(payload)
 				sys.stdout.flush()
@@ -82,6 +86,7 @@ if __name__ == "__main__":
 				sys.stdout.write(".")
 				sys.stdout.flush()
 
+			log.close()
 			time.sleep(10)
 			
 	except:
