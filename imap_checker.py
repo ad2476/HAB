@@ -43,17 +43,16 @@ if __name__ == "__main__":
 	gmail = auth(username, password)
 	
 	try:
-		t0 = time.time()
 		while True:
-			t1=time.time()
-			if t1-t0==10.0:
-				gmail.select("INBOX") # connect to inbox
-				raw = getMail(gmail)
-				message = parseMail(raw)
-	
-				if message.get_payload() != "":
-					print message.get_payload()
-				t0=t1
+			gmail.select("INBOX") # connect to inbox
+			raw = getMail(gmail)
+			message = parseMail(raw)
+
+			if message.get_payload() != "":
+				print message.get_payload() + "\b"
+			else:
+				print "."
+			time.sleep(10)
 			
 	except:
 		pass
