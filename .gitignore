@@ -1,5 +1,6 @@
 # Custom files
 gps_checker.py
+TinyGPS_Communication/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
