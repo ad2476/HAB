@@ -36,20 +36,23 @@ def parseMail(raw_mail):
 	return msg
 	
 # Parse the message payload to return a tuple of LAT/LON coordinates
+# Message format: hh:mm:ss / lat lon / altitude / speed
 def parsePayload(message):
 	start = message.find("/") + 2
 	if start != 1: # The slash exists
 		end = message.find("/", start) - 1
 		if end != -2: # The second slash exists
-			raw_coords = message[start:end].split()
+			raw_coords = message[start:end].split() # Get coords in millionths of degree
 			start = message.find("/", end)+2
-			if start != 1:
+			if start != 1: # The third slash exists
 				end = message.find("/", start)-1
-				if end != -2:
+				if end != -2: # The fourth slash exists
+					''' Convert coords into degrees '''
 					coords = []
 					for each in raw_coords:
 						coords.append(str(float(each)/(1.0e6)))
 
+					''' Get altitude, convert to meters '''
 					coords.append(str(float(message[start:end])/100.0))
 
 					return tuple(coords)
