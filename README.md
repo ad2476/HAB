@@ -46,17 +46,17 @@ Exterior temperatures will reach approximately -60ºC during flight. A heating s
 
 In order to mitigate total systems failure due to drained batteries, the electronics are divided into four power systems:
 
-* 4x 1.5V 3000mAh Energizer Lithium in series (6V nominal output): FCS, Sensors system, GPS system
-  * Expected life: Not yet calculated, likely several hours - expect less due to effects of cold
-* 2x 3.7V 2000mAh Li-ion in series (7.4V nominal output): GSM module
+1. **4x 1.5V 3000mAh Energizer Lithium in series (6V nominal output)**: FCS, Sensors system, GPS system
+  * Expected life: Not yet calculated, likely several hours - expect fewer due to effects of cold
+2. **2x 3.7V 2000mAh Li-ion in series (7.4V nominal output)**: GSM module
   * Expected life: Max. 1000h (only standby), Min. 5.7h (only GPRS transmission)
-* 2x 3.7V 2000mAh Li-ion: Camera system (1 battery for video cameras, 1 battery for photo camera)
-  * Expected life of video: Max. 20h (assuming 100mA draw) - expect less due to effects of cold
-  * Expected life of photo: Max. 5.8h (assuming 345mA draw) - expect less due to effects of cold
-* 2x 3.7V 850mAh Li-ion (7.4V nominal output): Heating system
-  * Expected life: 1.2h (700 mA draw) - expect less due to effects of cold (only active if internal temp < 0º C)
+3. **2x 3.7V 2000mAh Li-ion**: Camera system (1 battery for video cameras, 1 battery for photo camera)
+  * Expected life of video: Max. 20h (assuming 100mA draw) - expect fewer due to effects of cold
+  * Expected life of photo: Max. 5.8h (assuming 345mA draw) - expect fewer due to effects of cold
+4. **2x 3.7V 850mAh Li-ion (7.4V nominal output)**: Heating system
+  * Expected life: 1.2h (700 mA draw) - expect fewer due to effects of cold (only active if internal temp < 0º C)
 
-With an expected flight duration of 2-3h, this should be plenty of battery capacity, even accounting for the effects of cold. Freezer tests will be run well in advance of launch.
+With an expected flight duration of 2-3h, this should be plenty of battery capacity, even accounting for the effects of cold. Freezer tests will be run well in advance of launch to determine true capacity.
 
 ## Ascent, Egress and Payload
 
