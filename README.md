@@ -42,6 +42,20 @@ Initial freezer tests indicate a battery life of 2 hours with a 600mAh battery. 
 
 Exterior temperatures will reach approximately -60ºC during flight. A heating system is necessary for continued functioning of the electronics. It shall consist of an independent system of two heating pads and two 850mAh batteries, toggled by the FCS when interior temperatures drop below 0ºC.
 
+## Power Systems
+
+In order to mitigate total systems failure due to drained batteries, the electronics are divided into four power systems:
+
+* 4x 1.5V 3000mAh Energizer Lithium in series (6V nominal output): FCS, Sensors system, GPS system
+  * Expected life: Not yet calculated, likely several hours - expect less due to effects of cold
+* 2x 3.7V 2000mAh Li-ion in series (7.4V nominal output): GSM module
+  * Expected life: Max. 1000h (only standby), Min. 5.7h (only GPRS transmission)
+* 2x 3.7V 2000mAh Li-ion: Camera system (1 battery for video cameras, 1 battery for photo camera)
+  * Expected life of video: Max. 20h (assuming 100mA draw) - expect less due to effects of cold
+  * Expected life of photo: Max. 5.8h (assuming 345mA draw) - expect less due to effects of cold
+* 2x 3.7V 850mAh Li-ion (7.4V nominal output): Heating system
+  * Expected life: 1.2h (700 mA draw) - expect less due to effects of cold (only active if internal temp < 0º C)
+
 ## Ascent, Egress and Payload
 
 Kaymont Balloons provides weather balloons. Ripstop chutes are an option for parachute sourcing. Helium will be used for lift. The payload container will be insulated with styrofoam and mylar.
