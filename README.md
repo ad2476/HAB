@@ -56,6 +56,8 @@ In order to mitigate total systems failure due to drained batteries, the electro
 * 2x 3.7V 850mAh Li-ion (7.4V nominal output): Heating system
   * Expected life: 1.2h (700 mA draw) - expect less due to effects of cold (only active if internal temp < 0º C)
 
+With an expected flight duration of 2-3h, this should be plenty of battery capacity, even accounting for the effects of cold. Freezer tests will be run well in advance of launch.
+
 ## Ascent, Egress and Payload
 
 Kaymont Balloons provides weather balloons. Ripstop chutes are an option for parachute sourcing. Helium will be used for lift. The payload container will be insulated with styrofoam and mylar.
