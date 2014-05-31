@@ -4,13 +4,13 @@ High-Altitude Balloon
 
 ## Purpose
 
-A payload will be delivered to and recovered from approximately 27’000m altitude. The purpose of this project is to take atmospheric gas measurements, record data on the payload in free-fall, and gain an understanding of high-altitude winds through calculations of the balloon’s trajectory over land.
+A payload will be delivered to and recovered from approximately 27’000m altitude. The purpose of this project is to take atmospheric gas measurements, record data on the payload in free-fall, and gain an understanding of high-altitude winds through post-flight calculations of the balloon’s trajectory over land.
 
 ## Flight Computer
 
 The flight control system (FCS) consists of:
 
-* Arduino Pro 5V as flight computer
+* Arduino Pro 3.3V as flight computer
 * OpenLog + 8GB µSD card for data logging
 
 On-board sensing of systems status will be added (i.e. ensuring all systems are functioning during flight, monitoring of battery levels).
@@ -49,7 +49,7 @@ Exterior temperatures will reach approximately -60ºC during flight. A heating s
 
 In order to mitigate total systems failure due to drained batteries, the electronics are divided into four power systems:
 
-1. **4x 1.5V 3000mAh Energizer Lithium in series (6V nominal output)**: FCS, Sensors system, GPS system
+1. **3x 1.5V 3000mAh Energizer Lithium in series (4.5V nominal output)**: FCS, Sensors system, GPS system
   * Expected life: Not yet calculated, likely several hours - expect fewer due to effects of cold
 2. **2x 3.7V 2000mAh Li-ion in series (7.4V nominal output)**: GSM module
   * Expected life: Max. 1000h (only standby), Min. 5.7h (only GPRS transmission)
