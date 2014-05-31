@@ -25,11 +25,12 @@ The GSM module will send text messages of the balloon’s altitude and coordinat
 
 The sensors system will operate over either the I2C bus or through digital/analog input.
 
-* BMP085 Barometric pressure sensor (for determining altitude)
+* BMP180 Barometric pressure sensor (for determining altitude)
 * MMA7361 3-axis accelerometer
 * LPY503AL Gyroscope
 * MAG3110 3-axis magnetometer (I may have broken it)
 * TMP36 temperature sensor
+* Thermistor 10K
 * LPG and CNG gas sensors
 
 ## Camera System
