@@ -19,7 +19,7 @@ On-board sensing of systems status will be added (i.e. ensuring all systems are 
 
 The GPS system consists of an LS20031 66-channel GPS receiver connected via serial port expander. Data will be interpreted, logged and forwarded to the GSM module through the FCS.
 
-The GSM module will send text messages of the balloon’s altitude and coordinates, battery status and other vital information.
+The GSM module will send text messages of the balloon’s altitude and coordinates, and other vital information.
 
 ## Sensors System
 
@@ -35,9 +35,11 @@ The sensors system will operate over either the I2C bus or through digital/analo
 
 ## Camera System
 
-The camera system will likely consist of a Panasonic Lumix digital camera. The shutter will be triggered with a micro servo above the trigger button. Pictures will be stored on a 16GB µSD card.
+The camera system will likely consist of a Panasonic Lumix digital camera. The camera will take pictures in burst mode (1 Hz) until the 32GB µSD card runs out of space - approximately 2h of HD photographs.
 
 Initial freezer tests indicate a battery life of 2 hours with a 600mAh battery. A 2000mAh battery will be tested next time.
+
+Additional video cameras in the form of two keychain 808 cameras attached to a 2000mAh battery will film the flight.
 
 ## Heating System
 
@@ -57,9 +59,9 @@ In order to mitigate total systems failure due to drained batteries, the electro
 4. **2x 3.7V 850mAh Li-ion (7.4V nominal output)**: Heating system
   * Expected life: 1.2h (700 mA draw) - expect fewer due to effects of cold (only active if internal temp < 0º C)
 
-With an expected flight duration of 2-3h, this should be plenty of battery capacity, even accounting for the effects of cold. Freezer tests will be run well in advance of launch to determine true capacity.
+With an expected flight duration of 2.8±0.5h, this should be plenty of battery capacity, even accounting for the effects of cold. Freezer tests will be run well in advance of launch to determine true capacity.
 
 ## Ascent, Egress and Payload
 
-Kaymont Balloons provides weather balloons. Ripstop chutes are an option for parachute sourcing. Helium will be used for lift. The payload container will be insulated with styrofoam and mylar.
-Natural egress should occur around 27’000m when the balloon bursts.
+Kaymont Balloons provides weather balloons. Parachute purchased from the-rocketman.com. Helium will be used for lift. The payload container will be insulated with styrofoam and mylar, and be cushioned with various forms of foam.
+Natural egress should occur around 33’000m (100'000ft) when the balloon bursts. Payload mass will be approximately 1.2 kg.
