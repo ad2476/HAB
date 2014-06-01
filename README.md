@@ -4,13 +4,13 @@ High-Altitude Balloon
 
 ## Purpose
 
-A payload will be delivered to and recovered from approximately 27’000m altitude. The purpose of this project is to take atmospheric gas measurements, record data on the payload in free-fall, and gain an understanding of high-altitude winds through calculations of the balloon’s trajectory over land.
+A payload will be delivered to and recovered from approximately 27’000m altitude. The purpose of this project is to take atmospheric gas measurements, record data on the payload in free-fall, and gain an understanding of high-altitude winds through post-flight calculations of the balloon’s trajectory over land.
 
 ## Flight Computer
 
 The flight control system (FCS) consists of:
 
-* Arduino Pro 5V as flight computer
+* Arduino Pro 3.3V as flight computer
 * OpenLog + 8GB µSD card for data logging
 
 On-board sensing of systems status will be added (i.e. ensuring all systems are functioning during flight, monitoring of battery levels).
@@ -19,24 +19,27 @@ On-board sensing of systems status will be added (i.e. ensuring all systems are 
 
 The GPS system consists of an LS20031 66-channel GPS receiver connected via serial port expander. Data will be interpreted, logged and forwarded to the GSM module through the FCS.
 
-The GSM module will send text messages of the balloon’s altitude and coordinates, battery status and other vital information.
+The GSM module will send text messages of the balloon’s altitude and coordinates, and other vital information.
 
 ## Sensors System
 
 The sensors system will operate over either the I2C bus or through digital/analog input.
 
-* BMP085 Barometric pressure sensor (for determining altitude)
+* BMP180 Barometric pressure sensor (for determining altitude)
 * MMA7361 3-axis accelerometer
 * LPY503AL Gyroscope
 * MAG3110 3-axis magnetometer (I may have broken it)
 * TMP36 temperature sensor
+* Thermistor 10K
 * LPG and CNG gas sensors
 
 ## Camera System
 
-The camera system will likely consist of a Panasonic Lumix digital camera. The shutter will be triggered with a micro servo above the trigger button. Pictures will be stored on a 16GB µSD card.
+The camera system will likely consist of a Panasonic Lumix digital camera. The camera will take pictures in burst mode (1 Hz) until the 32GB µSD card runs out of space - approximately 2h of HD photographs.
 
 Initial freezer tests indicate a battery life of 2 hours with a 600mAh battery. A 2000mAh battery will be tested next time.
+
+Additional video cameras in the form of two keychain 808 cameras attached to a 2000mAh battery will film the flight.
 
 ## Heating System
 
@@ -46,7 +49,7 @@ Exterior temperatures will reach approximately -60ºC during flight. A heating s
 
 In order to mitigate total systems failure due to drained batteries, the electronics are divided into four power systems:
 
-1. **4x 1.5V 3000mAh Energizer Lithium in series (6V nominal output)**: FCS, Sensors system, GPS system
+1. **3x 1.5V 3000mAh Energizer Lithium in series (4.5V nominal output)**: FCS, Sensors system, GPS system
   * Expected life: Not yet calculated, likely several hours - expect fewer due to effects of cold
 2. **2x 3.7V 2000mAh Li-ion in series (7.4V nominal output)**: GSM module
   * Expected life: Max. 1000h (only standby), Min. 5.7h (only GPRS transmission)
@@ -56,9 +59,9 @@ In order to mitigate total systems failure due to drained batteries, the electro
 4. **2x 3.7V 850mAh Li-ion (7.4V nominal output)**: Heating system
   * Expected life: 1.2h (700 mA draw) - expect fewer due to effects of cold (only active if internal temp < 0º C)
 
-With an expected flight duration of 2-3h, this should be plenty of battery capacity, even accounting for the effects of cold. Freezer tests will be run well in advance of launch to determine true capacity.
+With an expected flight duration of 2.8±0.5h, this should be plenty of battery capacity, even accounting for the effects of cold. Freezer tests will be run well in advance of launch to determine true capacity.
 
 ## Ascent, Egress and Payload
 
-Kaymont Balloons provides weather balloons. Ripstop chutes are an option for parachute sourcing. Helium will be used for lift. The payload container will be insulated with styrofoam and mylar.
-Natural egress should occur around 27’000m when the balloon bursts.
+Kaymont Balloons provides weather balloons. Parachute purchased from the-rocketman.com. Helium will be used for lift. The payload container will be insulated with styrofoam and mylar, and be cushioned with various forms of foam.
+Natural egress should occur around 33’000m (100'000ft) when the balloon bursts. Payload mass will be approximately 1.2 kg.
