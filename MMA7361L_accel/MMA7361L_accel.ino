@@ -1,5 +1,5 @@
 // Just hooked up to analog inputs on the arduino. Not making use of self-test (ST), G-select, or sleep in this example code
-// G-select hardwired to 1.5g range
+// G-select hardwired to 1.5g range (tied to GND), sleep tied to VCC, ST tied to GND
 
 #define _0GD 8
 #define XOUT A1
