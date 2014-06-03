@@ -2,17 +2,23 @@
 #include <Wire.h>
 #include "Adafruit_MCP23008.h"
 
+#define LED1 0
+#define LED2 1
+
 Adafruit_MCP23008 mcp; 
 
 void setup() {
   mcp.begin();
   
-  mcp.pinMode(0, OUTPUT);
+  mcp.pinMode(LED1, OUTPUT);
+  mcp.pinMode(LED2, OUTPUT);
 }
 
 void loop() {
   delay(500);
-  mcp.digitalWrite(0, HIGH);
+  mcp.digitalWrite(LED1, LOW);
+  mcp.digitalWrite(LED2, HIGH);
   delay(500);
-  mcp.digitalWrite(0, LOW);
+  mcp.digitalWrite(LED1, HIGH);
+  mcp.digitalWrite(LED2, LOW);
 }
