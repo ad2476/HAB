@@ -6,12 +6,6 @@
 
 /* --- GPS/GSM-specific  --- */
 /* --- definitions       --- */
-#define GPSRX 4
-#define GPSTX 5
-
-#define GSMRX 2
-#define GSMTX 3
-
 #define PREC1 6
 #define PREC2 2
 
@@ -24,10 +18,21 @@
 #define RCPT "+12035391858"
 /* ------------------------- */
 
-/* --- Digital Pin       --- */
+/* --- Analog/Digital Pin--- */
 /* --- Definitions       --- */
 // When driven high, this pin will powerdown
 // any non-critical devices
-#define POWERDOWN 9
+#define TMP A0
+#define SIG A1
+// A2-A3 unused
+// A4 and A5 are reserved for I2C
+
+#define GSMRX 2
+#define GSMTX 3
+#define GPSRX 4
+#define GPSTX 5
+#define POWERDOWN 6
+// 7-9 unused
+// Pins 10-13 reserved for SPI
 
 /* ------------------------- */

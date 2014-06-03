@@ -5,9 +5,7 @@
 // ST - Self test (drive high to initiate self-test)
 #include <definitions.h>
 
-#define ZX4 A4
-#define ZX1 A4
-#define HP 10
+#define ZX1 A3
 
 // Low sensitivity: 8.3 mV/(deg/s) - range: +/-120 deg/s
 #define LOWSENS 8.3
@@ -27,17 +25,10 @@ float toDegS(int analog) {
 
 void setup() {
   Serial.begin(SERIALBAUD);
-  
-  pinMode(HP, OUTPUT);
-  pinMode(POWERDOWN, OUTPUT);
-  
-  digitalWrite(HP, HIGH);
-  delay(50);
-  digitalWrite(HP, LOW);
 }
 
 void loop() {
-  zrot = toDegS(analogRead(ZX4));
+  zrot = toDegS(analogRead(ZX1));
   
   Serial.print("Z-rotation: "); Serial.println(zrot);
   
