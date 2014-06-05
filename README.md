@@ -4,7 +4,7 @@ High-Altitude Balloon
 
 ## Purpose
 
-A payload will be delivered to and recovered from approximately 27’000m altitude. The purpose of this project is to take atmospheric gas measurements, record data on the payload in free-fall, and gain an understanding of high-altitude winds through post-flight calculations of the balloon’s trajectory over land.
+A payload will be delivered to and recovered from approximately 30’480m (100'000ft) altitude. The purpose of this project is to take atmospheric gas measurements, record data on the payload in free-fall, and gain an understanding of high-altitude winds through post-flight calculations of the balloon’s trajectory over land.
 
 ## Flight Computer
 
