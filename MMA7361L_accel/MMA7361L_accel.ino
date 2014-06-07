@@ -12,7 +12,7 @@ float x, y, z;
 
 // Convert analog reading to g
 float toG(int analog) {
-  int mV = map(analog, 0, 1024, 0, 3300); // map to mV
+  int mV = map(analog, 0, 1023, 0, 3300); // map to mV
   
   return ((float)mV/850.0-1.7);
 }

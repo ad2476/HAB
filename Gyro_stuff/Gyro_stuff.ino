@@ -17,7 +17,7 @@
 float zrot; // Rotation around z
 
 float toDegS(int analog) {
-  int mV = map(analog, 0, 1024, 0, 3300); // map to mV
+  int mV = map(analog, 0, 1023, 0, 3300); // map to mV
   
   return ((float)mV/LOWSENS - LOWRANGE - 32.0);
 }
