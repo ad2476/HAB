@@ -1,3 +1,11 @@
+#ifndef _definitions_H
+#define _definitions_H
+
+#include "Arduino.h"
+#include <SoftwareSerial.h>
+#include <TinyGPS.h>
+#include <Wire.h>
+
 /* --- Serial baud rates --- */
 #define GPSBAUD 9600
 #define SERIALBAUD 9600
@@ -36,3 +44,5 @@
 // Pins 10-13 reserved for SPI
 
 /* ------------------------- */
+
+#endif
