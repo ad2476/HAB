@@ -4,3 +4,4 @@ TinyGPS_Communication/
 Research/ # Is a symlink
 *.txt
 *.kml
+*.swp
