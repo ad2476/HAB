@@ -54,6 +54,13 @@ void packGPSdata(char* strbuf);
 // 7-9 unused
 // Pins 10-13 reserved for SPI
 
+/* MCP expanded pins */
+#define S0 0
+#define S1 1
+#define S2 2
+#define S3 3
+#define _0GD 4
+
 // Read from a mux pin
 int muxRead(int pin);
 
@@ -80,7 +87,9 @@ int interior_temp;
 int tmpTemp(int analog);
 
 /* --- Gyro stuff --- */
-float zrot; // Rotation around z
+float gyroRot(int analog);
 
+/* --- Accelerometer stuff --- */
+float gAccel(int analog);
 
 #endif

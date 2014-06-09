@@ -27,20 +27,30 @@ int tmpTemp(int analog) {
   return (mV/10 - 50);
 }
 
+float gyroRot(int analog) {
+  int mV = map(analog, 0, 1023, 0, 3300); // map to mV
+  return ((float)mV/8.3 - 120.0 - 32.0); // 32.0 is a linear correction I applied...
+}
+
+float gAccel(int analog) {
+  int mV = map(analog, 0, 1023, 0, 3300);
+  return ((float)mV/850.0-1.7);
+}
+
 // Read from a mux pin
 int muxRead(int pin) {
   int s0, s1, s2, s3;
   if(pin>0xFF || pin<0x0) return -1;
 
-  s0 = pin & 0x1
-  s1 = (pin & 0x2) >> 1
-  s2 = (pin & 0x4) >> 2
-  s3 = (pin & 0x8) >> 3
+  s0 = (pin & 0x1) >> S0;
+  s1 = (pin & 0x2) >> S1;
+  s2 = (pin & 0x4) >> S2;
+  s3 = (pin & 0x8) >> S3;
 
-  mcp.digitalWrite(0, s0);
-  mcp.digitalWrite(1, s1);
-  mcp.digitalWrite(2, s2);
-  mcp.digitalWrite(3, s3);
+  mcp.digitalWrite(S0, s0);
+  mcp.digitalWrite(S1, s1);
+  mcp.digitalWrite(S2, s2);
+  mcp.digitalWrite(S3, s3);
   delay(10);
   return analogRead(SIG);
 }

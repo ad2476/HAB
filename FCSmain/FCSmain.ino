@@ -1,7 +1,3 @@
-#include <SerialGSM.h>
-#include <SoftwareSerial.h>
-#include <TinyGPS.h>
-
 // HAB/Definitions/ is symlinked to sketchbook/libraries/Definitions/
 #include <definitions.h>
 
@@ -13,13 +9,32 @@ unsigned long int time=0; // Running time in seconds
 
 void setup()
 {
-  /* Begin hw/sw serial communications */
+  /* Begin hw/sw/i2c/spi serial communications */
   Serial.begin(SERIALBAUD);
   GPS.begin(GPSBAUD);
   cell.begin(GSMBAUD);
-  
+
+  /* Set up I/O port expander */
+  mcp.begin();
+  for(int pin=S0; i<_0GD; i++)
+    mcp.pinMode(pin, OUTPUT); // Set GP0-GP3 as outputs: for analog mux
+  mcp.pinMode(_0GD, INPUT); // Accelerometer 0g detect
+
   Serial.println(F("HAB FCS v.1.0"));
   
+  /* Read BMP180 EEPROM coefficients */
+  ac1 = read_n_bytes(0xAA, 2);
+  ac2 = read_n_bytes(0xAC, 2);
+  ac3 = read_n_bytes(0xAE, 2);
+  ac4 = read_n_bytes(0xB0, 2);
+  ac5 = read_n_bytes(0xB2, 2);
+  ac6 = read_n_bytes(0xB4, 2);
+  b1 = read_n_bytes(0xB6, 2);
+  b2 = read_n_bytes(0xB8, 2);
+  mb = read_n_bytes(0xBA, 2);
+  mc = read_n_bytes(0xBC, 2);
+  md = read_n_bytes(0XBE, 2);
+
   /* Initialise the cell module */
   cell.listen();
   cell.Verbose(true);
@@ -35,7 +50,26 @@ void setup()
 
 void loop()
 {
-  char GPSbuf[80];
+  char GPSbuf[80]; 
+  
+  // Altitude in m (max error 7m below actual) - from BMP180
+  int alt; int32_t b5;
+
+  /* Exterior pressure, temperature data */
+  b5 = bmpTemp();
+  pressure = calcPressure(b5);
+  int alt = calcAltitude();
+
+  // Interior temperature data:
+  interior_temp = tmpTemp(muxRead(TMP));
+
+  // Rotation data:
+  float zrot = gyroRot(muxRead(ZX1));
+
+  // Acceleration data:
+  float x = gAccel(muxRead(GX));
+  float y = gAccel(muxRead(GY));
+  float z = gAccel(muxRead(GZ));
         
   // For 15 seconds we parse GPS data and report some key values
   GPS.listen(); // Listen on the GPS serial
