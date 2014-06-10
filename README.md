@@ -13,7 +13,7 @@ The flight control system (FCS) consists of:
 * Arduino Pro 3.3V as flight computer
 * OpenLog + 8GB µSD card for data logging
 
-On-board sensing of systems status will be added (i.e. ensuring all systems are functioning during flight, monitoring of battery levels).
+The FCS controls the sensors and GPS systems.
 
 ## GPS/GSM System
 
@@ -28,18 +28,15 @@ The sensors system will operate over either the I2C bus or through digital/analo
 * BMP180 Barometric pressure sensor (for determining altitude)
 * MMA7361 3-axis accelerometer
 * LPY503AL Gyroscope
-* MAG3110 3-axis magnetometer (I may have broken it)
 * TMP36 temperature sensor
-* Thermistor 10K
-* LPG and CNG gas sensors
 
 ## Camera System
 
-The camera system will likely consist of a Panasonic Lumix digital camera. The camera will take pictures in burst mode (1 Hz) until the 32GB µSD card runs out of space - approximately 2h of HD photographs.
+The camera system will consist of a Panasonic Lumix digital camera. The camera will take pictures in burst mode (1 Hz) until the 32GB µSD card runs out of space - approximately 2h of HD photographs.
 
-Initial freezer tests indicate a battery life of 2 hours with a 600mAh battery. A 2000mAh battery will be tested next time.
+Initial freezer tests indicate a battery life of 1 hour with a 600mAh battery. A 2000mAh battery will be tested next time.
 
-Additional video cameras in the form of two keychain 808 cameras attached to a 2000mAh battery will film the flight.
+Additional video cameras in the form of two keychain 808 cameras attached to a 2000mAh battery will film the flight. One will carry a 16GB µSD card, and the other an 8GB one.
 
 ## Heating System
 
@@ -63,4 +60,4 @@ With an expected flight duration of 2.8±0.5h, this should be plenty of battery 
 ## Ascent, Egress and Payload
 
 Kaymont Balloons provides weather balloons. Parachute purchased from the-rocketman.com. Helium will be used for lift. The payload container will be insulated with styrofoam and mylar, and be cushioned with various forms of foam.
-Natural egress should occur around 33’000m (100'000ft) when the balloon bursts. Payload mass will be approximately 1.2 kg.
+Natural egress should occur around 30’480m (100'000ft) when the balloon bursts. Payload mass will be approximately 1.2 kg.
