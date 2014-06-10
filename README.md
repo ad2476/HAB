@@ -43,21 +43,20 @@ Additional video cameras in the form of two keychain 808 cameras attached to a 2
 
 ## Heating System
 
-Exterior temperatures will reach approximately -60ºC during flight. A heating system is necessary for continued functioning of the electronics. It shall consist of an independent system of two heating pads and two 850mAh batteries, toggled by the FCS when interior temperatures drop below 0ºC.
+Exterior temperatures will reach approximately -60ºC during flight. A heating system is necessary for continued functioning of the electronics, and should hopefully constrain temperatures above -20ºC. It shall consist of an independent system of two heating pads and 4 AA Lithium batteries in series, and shall operate continuously.
 
 ## Power Systems
 
 In order to mitigate total systems failure due to drained batteries, the electronics are divided into four power systems:
 
-1. **3x 1.5V 3000mAh Energizer Lithium in series (4.5V nominal output)**: FCS, Sensors system, GPS system
-  * Expected life: Not yet calculated, likely several hours - expect fewer due to effects of cold
+1. **3x 1.5V 3000mAh Energizer Lithium Ultimate (4.5V nominal output)**: FCS, Sensors system, GPS system
+  * Expected life: Not calculated, likely several hours - expect fewer due to effects of cold
 2. **2x 3.7V 2000mAh Li-ion in series (7.4V nominal output)**: GSM module
-  * Expected life: Max. 1000h (only standby), Min. 5.7h (only GPRS transmission)
-3. **2x 3.7V 2000mAh Li-ion**: Camera system (1 battery for video cameras, 1 battery for photo camera)
-  * Expected life of video: Max. 20h (assuming 100mA draw) - expect fewer due to effects of cold
-  * Expected life of photo: Max. 5.8h (assuming 345mA draw) - expect fewer due to effects of cold
-4. **2x 3.7V 850mAh Li-ion (7.4V nominal output)**: Heating system
-  * Expected life: 1.2h (700 mA draw) - expect fewer due to effects of cold (only active if internal temp < 0º C)
+  * Expected life: Max. 1000h (only standby), Min. 5.7h (only GPRS transmission), expect fewer due to cold
+3. **1x 3.7V 2000mAh Li-ion**: Camera system (1 battery for video cameras, 1 battery for photo camera)
+  * Expected life: Max. 4.5h (assuming 445mA draw) - expect fewer due to effects of cold
+4. **4x 1.5V 3000mAh Energizer Lithium Ultimate (6V nominal output)**: Heating system
+  * Expected life: 4h (700 mA draw) - expect fewer due to effects of cold (active throughout)
 
 With an expected flight duration of 2.8±0.5h, this should be plenty of battery capacity, even accounting for the effects of cold. Freezer tests will be run well in advance of launch to determine true capacity.
 
