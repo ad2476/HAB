@@ -3,6 +3,7 @@
 
 #include "Arduino.h"
 #include <SoftwareSerial.h>
+#include <SerialGSM.h>
 #include <TinyGPS.h>
 #include <Wire.h>
 #include "Adafruit_MCP23008.h"
@@ -11,23 +12,6 @@
 #define GPSBAUD 9600
 #define SERIALBAUD 9600
 #define GSMBAUD 4800
-/* ------------------------- */
-
-/* --- GPS/GSM-specific  --- */
-/* --- definitions       --- */
-#define PREC1 6
-#define PREC2 2
-
-#define LAT 0
-#define LON 1
-#define ALT 2
-#define SPE 3
-#define COU 4
-
-#define RCPT "+12035391858"
-
-void packGPSdata(char* strbuf);
-
 /* ------------------------- */
 
 /* --- Analog/Digital Pin--- */
@@ -61,8 +45,29 @@ void packGPSdata(char* strbuf);
 #define S3 3
 #define _0GD 4
 
+Adafruit_MCP23008 mcp;
+
 // Read from a mux pin
-int muxRead(int pin);
+//extern int muxRead(int pin);
+
+/* ------------------------- */
+
+/* --- GPS/GSM-specific  --- */
+/* --- definitions       --- */
+#define PREC1 6
+#define PREC2 2
+
+#define LAT 0
+#define LON 1
+#define ALT 2
+#define SPE 3
+#define COU 4
+
+#define RCPT "+12035391858"
+
+TinyGPS gps;
+SoftwareSerial GPS(GPSRX, GPSTX);
+SerialGSM cell(GSMRX, GSMTX);
 
 /* ------------------------- */
 
@@ -76,20 +81,16 @@ uint16_t ac4, ac5, ac6;
 
 int exterior_temp, pressure; // exterior_temp in hundredths-°C, pressure truncated to mbar
 
-int32_t bmpTemp(); // Read uncompensated temperature
-int32_t uncompPressure(); // Read uncompensated pressure
-int calcPressure(int32_t b5); // Returns truncated pressure as int (to save space)
-int calcAltitude();
-uint16_t read_n_bytes(uint8_t reg, int n);
-
 /* --- TMP36 sensor stuff: --- */
 int interior_temp;
-int tmpTemp(int analog);
+//extern int tmpTemp(int analog);
 
 /* --- Gyro stuff --- */
-float gyroRot(int analog);
 
 /* --- Accelerometer stuff --- */
-float gAccel(int analog);
 
+/* ------------------------- */
+/* --- I2C Addresses --- */
+#define BMPADDR 0x77
+ 
 #endif

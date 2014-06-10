@@ -2,8 +2,6 @@
    These should be relatively stable functions - any unstable functions should
    remain in FCSmain.ino                                                     */
 
-#include <definitions.h>
-
 /* Packs all relevant GPS data into a logging string for OpenLog and SMS */
 void packGPSdata(char* strbuf) {
   long lat, lon;
