@@ -20,6 +20,7 @@ void packGPSdata(char* strbuf) {
   sprintf(strbuf, "%2d:%2d:%2d | %ld %ld | %ld | %ld", hour, minute, second, lat, lon, alt, kspeed);
 }
 
+// Read TMP36 sensor
 int tmpTemp(int analog) {
   int mV = map(analog, 0, 1023, 0, 3300); // map to mV
   return (mV/10 - 50);

@@ -52,7 +52,7 @@ void setup()
 
 void loop()
 {
-  char GPSbuf[80]; 
+  char GPSbuf[80];
   
   // Altitude in m (max error 7m below actual) - from BMP180
   int alt; int32_t b5;
@@ -75,7 +75,7 @@ void loop()
         
   // For 15 seconds we parse GPS data and report some key values
   GPS.listen(); // Listen on the GPS serial
-  for (unsigned long start = millis(); millis() - start < 15000;)
+  for (unsigned long start = millis(); millis() - start < 15000;) // TODO: The listen time must equal 15-[time for all other non-GSM tasks to complete]
   {
     while (GPS.available())
     {
