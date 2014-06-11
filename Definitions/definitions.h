@@ -23,11 +23,11 @@
 // A4 and A5 are reserved for I2C
 
 /* Extended analog pins: */
-#define TMP 0
-#define ZX1 1
-#define GX 2
-#define GY 3
-#define GZ 4
+#define ZX1 0
+#define GX 1
+#define GY 2
+#define GZ 3
+#define TMP 4
 
 /* Digital pins */
 #define GSMRX 2
