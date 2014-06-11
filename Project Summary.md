@@ -8,6 +8,9 @@ Here's a quick overview of what this project is, as well as details about Launch
 * *Backup dates*: 15.06.14, 22.06.14
 
 ###Possible Launch sites:
+
+----------
+
 Listed in order of proximity to Greenwich
 
 * 942-960 Noxon Road, Lagrangeville, NY (41.6439, -73.7985)
@@ -28,9 +31,11 @@ Listed in order of proximity to Greenwich
 The payload consists of: three cameras, a GPS unit, a GSM unit, an Arduino and various sensors, a heating system, and plenty of batteries. For a detailed overview of the project, see: https://github.com/ad2476/HAB.
 
 ###The setup:
-The flight package consists of three major components: Payload box, Parachute, and Balloon.
+The flight package consists of three major components: 
+**Payload box**, **Parachute**, and **Balloon**.
+
 ####*The Payload Box*:
-The box is constructed out of 6 rectangles insulating hard styrofoam, which are reinforced and held together through supporting wooden dowels and aluminum tape. Inside, foam padding on all sides keeps the payload cushioned and provides additional insulation against the frigid exterior (expecting outside) temperatures around -60°C). All electronics will be placed in the remaining space. 
+The box is constructed out of 6 rectangles insulating hard styrofoam, which are reinforced and held together through supporting wooden dowels and aluminum tape. Inside, foam padding on all sides keeps the payload cushioned and provides additional insulation against the frigid exterior (expecting outside temperatures of around -60°C). All electronics will be placed in the remaining space. 
 ####*The Parachute*:
 The parachute is a nylon chute that will be attached via a 50lb fishing line to the payload box. It will then, in turn, be attached from the top to the balloon neck (also via a 50lb fishing line). In this sense, it will "connect" the payload with the balloon, and will be ready to open when the balloon pops.
 
