@@ -38,7 +38,7 @@ float gAccel(int analog) {
 // Read from a mux pin
 int muxRead(int pin) {
   int s0, s1, s2, s3;
-  if(pin>0xFF || pin<0x0) return -1;
+  if(pin>0xF || pin<0x0) return -1;
 
   s0 = (pin & 0x1) >> S0;
   s1 = (pin & 0x2) >> S1;
