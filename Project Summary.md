@@ -5,7 +5,7 @@ Here's a quick overview of what this project is, as well as details about Launch
 
 ###Dates:
 * **Primary launch date**: 14.06.14
-* *Backup dates*: 15.06.14, 22.06.14
+* *Possible backup date*: 20.06.14
 
 ###Possible Launch sites:
 
