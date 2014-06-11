@@ -9,8 +9,6 @@ Here's a quick overview of what this project is, as well as details about Launch
 
 ###Possible Launch sites:
 
-----------
-
 Listed in order of proximity to Greenwich
 
 * 942-960 Noxon Road, Lagrangeville, NY (41.6439, -73.7985)
