@@ -43,7 +43,7 @@
 #define S1 1
 #define S2 2
 #define S3 3
-#define _0GD 4
+#define _0GD 7
 
 Adafruit_MCP23008 mcp;
 
