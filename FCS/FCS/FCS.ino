@@ -53,30 +53,42 @@ void setup()
 void loop()
 {
   char GPSbuf[80];
-  
-  // Altitude in m (max error 7m below actual) - from BMP180
-  int alt; int32_t b5;
-
-  /* Exterior pressure, temperature data */
-  b5 = bmpTemp();
-  pressure = calcPressure(b5);
-  alt = calcAltitude();
-
-  // Interior temperature data:
-  interior_temp = tmpTemp(muxRead(TMP));
-
-  // Rotation data:
-  float zrot = gyroRot(muxRead(ZX1));
-
-  // Acceleration data:
-  float x = gAccel(muxRead(GX));
-  float y = gAccel(muxRead(GY));
-  float z = gAccel(muxRead(GZ));
+  char databuf[80];
+  float zrot, x, y, z;
+  char* freefall="freefall";
+  int alt, t; int32_t b5; // Altitude in m (max error 7m below actual) - from BMP180
         
-  // For 15 seconds we parse GPS data and report some key values
-  GPS.listen(); // Listen on the GPS serial
-  for (unsigned long start = millis(); millis() - start < 15000;) // TODO: The listen time must equal 15-[time for all other non-GSM tasks to complete]
-  {
+  // For 15 seconds we parse GPS data and report some key values, and log sensor data every 500ms
+  GPS.listen(); // Listen on the GPS software serial
+  for (unsigned long start = millis(); millis() - start < 15000;) // The total time of all non-GSM operations must equal 15s
+  {    
+    if(millis()-start % 500 == 0) {
+      /* Exterior pressure, temperature data */
+      b5 = bmpTemp();
+      pressure = calcPressure(b5);
+      alt = calcAltitude();
+    
+      // Interior temperature data:
+      interior_temp = tmpTemp(muxRead(TMP));
+    
+      // Rotation data:
+      zrot = gyroRot(muxRead(ZX1));
+    
+      // Acceleration data:
+      x = gAccel(muxRead(GX));
+      y = gAccel(muxRead(GY));
+      z = gAccel(muxRead(GZ));
+      if(mcp.digitalRead(_0GD) == 0) freefall="";
+      
+      sprintf(databuf, "\t Sensors:> %d %d | %d %d | ", pressure, alt, interior_temp, exterior_temp);
+      Serial.print(databuf); 
+      Serial.print(zrot); Serial.print(" | ");
+      Serial.print(x); Serial.print(" ");
+      Serial.print(y); Serial.print(" ");
+      Serial.print(z); Serial.print(" | ");
+      Serial.print(freefall); Serial.println(" end.");
+    }
+    
     while (GPS.available())
     {
       char c = GPS.read();
@@ -87,7 +99,6 @@ void loop()
     }
   }
   Serial.println(GPSbuf);
-  
   
   time+=15;
   // Send a text every 60 seconds
