@@ -57,7 +57,5 @@ The FCS and its various sensors will be recording certain data during flight. Th
 * Acceleration in 3 dimensions, free-fall detection
 * GPS timestamp (UTC), coordinates, altitude
 
-*Data logging format*:
-
-`[Pressure] [Barom. Altitude] | [Interior temp] [Exterior temp] | [Z-rotation] | [X-accel] [Y-accel] [Z-accel] | [Freefall?]`
+*Data logging format*: `[Pressure] [Barom. Altitude] | [Interior temp] [Exterior temp] | [Z-rotation] | [X-accel] [Y-accel] [Z-accel] | [Freefall?]`
 
