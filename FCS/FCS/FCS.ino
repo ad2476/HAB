@@ -39,7 +39,7 @@ void setup()
 
   /* Initialise the cell module */
   cell.listen();
-  cell.Verbose(true);
+  cell.Verbose(false);
   cell.Boot();
   cell.checkSignalQuality();
   cell.FwdSMS2Serial();
