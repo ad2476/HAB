@@ -24,9 +24,9 @@
 
 /* Extended analog pins: */
 #define ZX1 0
-#define GX 1
+#define GZ 1
 #define GY 2
-#define GZ 3
+#define GX 3
 #define TMP 4
 
 /* Digital pins */
