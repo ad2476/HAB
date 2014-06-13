@@ -54,4 +54,5 @@ The FCS and its various sensors will be recording certain data during flight. Th
 * Exterior temperature and pressure - Also used as backup altimeter
 * GPS timestamp (UTC), coordinates, altitude
 
-*Data logging format*: `[UTC time] | [Latitude] [Longitude] | [GPS altitude] | [Speed] | [Pressure] [Barom. Altitude] | [Exterior temp]` 
+*Data logging format*: `[UTC time] | [Latitude] [Longitude] | [GPS altitude] | [Speed]`
+`Exterior:> [Pressure] [Barom. Altitude] | [Exterior temp]` 
