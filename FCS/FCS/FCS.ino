@@ -37,37 +37,38 @@ void setup()
   mc = read_n_bytes(0xBC, 2);
   md = read_n_bytes(0XBE, 2);
 
-  /* Initialise the cell module */
+  /* Initialise the cell module 
   cell.listen();
-  cell.Verbose(false);
+  cell.Verbose(true);
   cell.Boot();
   cell.checkSignalQuality();
   cell.FwdSMS2Serial();
   cell.Rcpt(RCPT);
   cell.Message("Starting FCS...");
-  cell.SendSMS();
+  cell.SendSMS(); */
   
-  delay(30000); // Wait 30s for things to clear
+  //delay(30000); // Wait 30s for things to clear
 }
 
 void loop()
 {
   char GPSbuf[80];
-  char databuf[80];
-  float zrot, x, y, z;
-  char* freefall="freefall";
+  char databuf[50];
+  /*float zrot, x, y, z;
+  int freefall; */
   int alt, t; int32_t b5; // Altitude in m (max error 7m below actual) - from BMP180
         
   // For 15 seconds we parse GPS data and report some key values, and log sensor data every 500ms
   GPS.listen(); // Listen on the GPS software serial
   for (unsigned long start = millis(); millis() - start < 15000;) // The total time of all non-GSM operations must equal 15s
   {    
-    if(millis()-start % 500 == 0) {
+    if(((millis()-start) % 500) == 0) {
       /* Exterior pressure, temperature data */
       b5 = bmpTemp();
       pressure = calcPressure(b5);
       alt = calcAltitude();
     
+      /*
       // Interior temperature data:
       interior_temp = tmpTemp(muxRead(TMP));
     
@@ -78,15 +79,18 @@ void loop()
       x = gAccel(muxRead(GX));
       y = gAccel(muxRead(GY));
       z = gAccel(muxRead(GZ));
-      if(mcp.digitalRead(_0GD) == 0) freefall="";
+      freefall = mcp.digitalRead(_0GD); */
       
-      sprintf(databuf, "\t Sensors:> %d %d | %d %d | ", pressure, alt, interior_temp, exterior_temp);
-      Serial.print(databuf); 
-      Serial.print(zrot); Serial.print(" | ");
+      //sprintf(databuf, "\t Exterior:> %d %d | %d | ", pressure, alt, exterior_temp);
+      //Serial.println(databuf); 
+      /*Serial.print(zrot); Serial.print(" | ");
       Serial.print(x); Serial.print(" ");
       Serial.print(y); Serial.print(" ");
       Serial.print(z); Serial.print(" | ");
-      Serial.print(freefall); Serial.println(" end.");
+      Serial.print(freefall); Serial.println(" end.");*/
+      
+      Serial.print("\t Exterior:> "); Serial.print(pressure); Serial.print(" "); Serial.print(alt); Serial.print(" | ");
+      Serial.println(exterior_temp);
     }
     
     while (GPS.available())

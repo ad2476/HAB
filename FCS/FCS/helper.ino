@@ -20,6 +20,7 @@ void packGPSdata(char* strbuf) {
   sprintf(strbuf, "%2d:%2d:%2d | %ld %ld | %ld | %ld", hour, minute, second, lat, lon, alt, kspeed);
 }
 
+/*
 // Read TMP36 sensor
 int tmpTemp(int analog) {
   int mV = map(analog, 0, 1023, 0, 3300); // map to mV
@@ -52,7 +53,7 @@ int muxRead(int pin) {
   mcp.digitalWrite(S3, s3);
   delay(10);
   return analogRead(SIG);
-}
+} */
 
 /* ---- Bunch of functions for BMP180 ---- */
 
@@ -73,7 +74,7 @@ int32_t bmpTemp()
   x1 = (UT - (int32_t)ac6) * (int32_t)ac5 >> 15;
   x2 = ((int32_t)mc << 11) / (x1 + (int32_t)md);
   b5 = x1 + x2;
-  exterior_temp = (int)((b5 + 8) >> 4)*10.0; // temperature in hundredths of deg-C
+  exterior_temp = ((b5 + 8) >> 4)/10.0; // temperature in deg-C
   return b5;
 }
 
@@ -98,7 +99,7 @@ int32_t uncompPressure()
 }
 
 /* Returns truncated pressure as int (to save space) */
-int calcPressure(int32_t b5) {
+float calcPressure(int32_t b5) {
   int32_t x1, x2, x3, b3, b6, p, UP;
   uint32_t b4, b7;
 
@@ -119,7 +120,7 @@ int calcPressure(int32_t b5) {
   x1 = (x1 * 3038) >> 16;
   x2 = (-7357 * p) >> 16;
   
-  return (int)((p + ((x1 + x2 + 3791) >> 4)) / 100.0f); // Return pressure in mbar
+  return ((p + ((x1 + x2 + 3791) >> 4)) / 100.0f); // Return pressure in mbar
 }
 
 int calcAltitude() {

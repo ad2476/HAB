@@ -79,10 +79,10 @@ SerialGSM cell(GSMRX, GSMTX);
 int16_t ac1, ac2, ac3, b1, b2, mb, mc, md;
 uint16_t ac4, ac5, ac6;
 
-int exterior_temp, pressure; // exterior_temp in hundredths-°C, pressure truncated to mbar
+float exterior_temp, pressure; // exterior_temp in hundredths-°C, pressure truncated to mbar
 
 /* --- TMP36 sensor stuff: --- */
-int interior_temp;
+// int interior_temp;
 //extern int tmpTemp(int analog);
 
 /* --- Gyro stuff --- */
