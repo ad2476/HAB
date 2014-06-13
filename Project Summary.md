@@ -52,9 +52,6 @@ If there's reception, the GSM unit will then send an SMS to a Google Voice numbe
 The FCS and its various sensors will be recording certain data during flight. These data will then be logged to a 4GB micro-SD card. The data recorded are:
 
 * Exterior temperature and pressure - Also used as backup altimeter
-* Internal temperature
-* Rotation around z-axis (measure the box's spin rate)
-* Acceleration in 3 dimensions, free-fall detection
 * GPS timestamp (UTC), coordinates, altitude
 
-*Data logging format*: `[Pressure] [Barom. Altitude] | [Exterior temp]` 
+*Data logging format*: `[UTC time] | [Latitude] [Longitude] | [GPS altitude] | [Speed] | [Pressure] [Barom. Altitude] | [Exterior temp]` 
