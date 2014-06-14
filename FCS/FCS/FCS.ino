@@ -1,6 +1,5 @@
 #include "SoftwareSerial.h"
 #include "Wire.h"
-#include "Adafruit_MCP23008.h"
 #include "math.h"
 
 // HAB/Definitions/ is symlinked to sketchbook/libraries/Definitions/
@@ -9,7 +8,7 @@
 #include "definitions.h"
 
 unsigned long int time=0; // Running time in seconds
-int state=LOW; // Remember the state of the LED pin
+int state=HIGH; // Remember the state of the LED pin
 
 void toggleLED() {
   digitalWrite(13, state);
@@ -22,14 +21,11 @@ void setup()
   Serial.begin(SERIALBAUD);
   GPS.begin(GPSBAUD);
   cell.begin(GSMBAUD);
+  
+  pinMode(13, OUTPUT);
+  toggleLED();
 
-  /* Set up I/O port expander */
-  mcp.begin();
-  for(int pin=S0; pin<_0GD; pin++)
-    mcp.pinMode(pin, OUTPUT); // Set GP0-GP3 as outputs: for analog mux
-  mcp.pinMode(_0GD, INPUT); // Accelerometer 0g detect
-
-  Serial.println(F("HAB FCS v.1.0"));
+  Serial.println(F("HAB FCS v.1.4"));
   
   /* Read BMP180 EEPROM coefficients */
   ac1 = read_n_bytes(0xAA, 2);
@@ -44,33 +40,29 @@ void setup()
   mc = read_n_bytes(0xBC, 2);
   md = read_n_bytes(0XBE, 2);
 
-  /* Initialise the cell module 
+  /* Initialise the cell module */
   cell.listen();
-  cell.Verbose(true);
+  cell.Verbose(false); // Set this to false in final code!
   cell.Boot();
   cell.checkSignalQuality();
   cell.FwdSMS2Serial();
   cell.Rcpt(RCPT);
   cell.Message("Starting FCS...");
-  cell.SendSMS(); */
+  cell.SendSMS();
   
-  //delay(30000); // Wait 30s for things to clear
+  delay(30000); // Wait 30s for things to clear
 }
 
 void loop()
 {
   char GPSbuf[80];
-  char databuf[50];
-  /*float zrot, x, y, z;
-  int freefall; */
-  int alt, t, interior_temp; int32_t b5; // Altitude in m (max error 7m below actual) - from BMP180
+  int alt, t, interior_temp; int32_t b5; // Altitude in m from BMP180
         
   // For 15 seconds we parse GPS data and report some key values, and log sensor data every 500ms
   GPS.listen(); // Listen on the GPS software serial
   for (unsigned long start = millis(); millis() - start < 15000;) // The total time of all non-GSM operations must equal 15s
   {    
     if(((millis()-start) % 500) == 0) {
-      toggleLED();
       /* Exterior pressure, temperature data */
       b5 = bmpTemp();
       pressure = calcPressure(b5);
@@ -79,12 +71,13 @@ void loop()
       /* Interior temperature */
       interior_temp = thermistor(analogRead(THERM));
       
-      Serial.print("\t Sensors:> "); Serial.print(pressure); Serial.print(" "); Serial.print(alt); Serial.print(" | ");
+      Serial.print("\t:> "); Serial.print(pressure); Serial.print(" "); Serial.print(alt); Serial.print(" | ");
       Serial.print(exterior_temp); Serial.print(" "); Serial.println(interior_temp);
     }
     
     while (GPS.available())
     {
+      toggleLED();
       char c = GPS.read();
       //Serial.write(c); // uncomment this line if you want to see the GPS data flowing
       if (gps.encode(c)) { // Process new GPS data here

@@ -17,18 +17,18 @@ SoftwareSerial(rxpin,txpin)
 }
 
 void SerialGSM::checkSignalQuality() {
-	Serial.println("AT+CSQ");
+	if(verbose) Serial.println("AT+CSQ");
 	this->println("AT+CSQ");
 	delay(DELAY);
 	this->ReadLine();
 }
 
 void SerialGSM::FwdSMS2Serial(){
-  Serial.println("AT+CMGF=1"); // set SMS mode to text
+  if(verbose) Serial.println("AT+CMGF=1"); // set SMS mode to text
   this->println("AT+CMGF=1"); // set SMS mode to text
   delay(DELAY);
   this->ReadLine();
-  Serial.println("AT+CNMI=3,3,0,0"); // set module to send SMS data to serial out upon receipt 
+  if(verbose) Serial.println("AT+CNMI=3,3,0,0"); // set module to send SMS data to serial out upon receipt 
   this->println("AT+CNMI=3,3,0,0"); // set module to send SMS data to serial out upon receipt 
   delay(DELAY);
   this->ReadLine();
@@ -39,7 +39,7 @@ void SerialGSM::SendSMS(char * cellnumber,char * outmsg){
   if (verbose) Serial.println(rcpt);
   this->StartSMS();
   this->Message(outmsg);
-  Serial.print(outmessage);
+  if(verbose) Serial.print(outmessage);
   this->print(outmessage);
   this->EndSMS();
   delay(500);
@@ -50,7 +50,7 @@ void SerialGSM::SendSMS(){
   //if (verbose) Serial.println(rcpt);
   //if (verbose) Serial.println(outmessage);
   this->StartSMS();
-  Serial.print(outmessage);
+  if(verbose) Serial.print(outmessage);
   this->print(outmessage);
   this->EndSMS();
   delay(500);
@@ -58,14 +58,14 @@ void SerialGSM::SendSMS(){
 }
 
 void SerialGSM::DeleteAllSMS(){
-  Serial.println("AT+CMGD=1,4"); // delete all SMS
+  if(verbose) Serial.println("AT+CMGD=1,4"); // delete all SMS
   this->println("AT+CMGD=1,4"); // delete all SMS
   delay(200);
   this->ReadLine();
 }
 
 void SerialGSM::Reset(){
-  Serial.println("AT+CFUN=1,1"); // Reset Modem
+  if(verbose) Serial.println("AT+CFUN=1,1"); // Reset Modem
   this->println("AT+CFUN=1,1"); // Reset Modem
   delay(200);
   this->ReadLine();
@@ -74,24 +74,24 @@ void SerialGSM::Reset(){
 
 void SerialGSM::EndSMS(){
   this->print(char(26));  // ASCII equivalent of Ctrl-Z
-  Serial.println();
+  if(verbose) Serial.println();
 
   //delay(5 * 1000); // the SMS module needs time to return to OK status
 }
 
 void SerialGSM::StartSMS(){
 
-  Serial.println("AT+CMGF=1"); // set SMS mode to text
+  if(verbose) Serial.println("AT+CMGF=1"); // set SMS mode to text
   this->println("AT+CMGF=1"); // set SMS mode to text
   delay(DELAY);
   this->ReadLine();
 
-  Serial.print("AT+CMGS=");
+  if(verbose) Serial.print("AT+CMGS=");
   this->print("AT+CMGS=");
 
   this->print(char(34)); // ASCII equivalent of "
 
-  Serial.println(rcpt);
+  if(verbose) Serial.println(rcpt);
   this->print(rcpt);
 
   this->println(char(34));  // ASCII equivalent of "

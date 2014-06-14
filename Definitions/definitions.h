@@ -6,7 +6,6 @@
 #include <SerialGSM.h>
 #include <TinyGPS.h>
 #include <Wire.h>
-#include "Adafruit_MCP23008.h"
 #include <math.h>
 
 /* --- Serial baud rates --- */
@@ -23,13 +22,6 @@
 // A1-A3 unused
 // A4 and A5 are reserved for I2C
 
-/* Extended analog pins: */
-#define ZX1 0
-#define GZ 1
-#define GY 2
-#define GX 3
-#define TMP 4
-
 /* Digital pins */
 #define GSMRX 2
 #define GSMTX 3
@@ -38,18 +30,6 @@
 #define POWERDOWN 6
 // 7-9 unused
 // Pins 10-13 reserved for SPI
-
-/* MCP expanded pins */
-#define S0 0
-#define S1 1
-#define S2 2
-#define S3 3
-#define _0GD 7
-
-Adafruit_MCP23008 mcp;
-
-// Read from a mux pin
-//extern int muxRead(int pin);
 
 /* ------------------------- */
 
