@@ -20,40 +20,16 @@ void packGPSdata(char* strbuf) {
   sprintf(strbuf, "%2d:%2d:%2d | %ld %ld | %ld | %ld", hour, minute, second, lat, lon, alt, kspeed);
 }
 
-/*
-// Read TMP36 sensor
-int tmpTemp(int analog) {
-  int mV = map(analog, 0, 1023, 0, 3300); // map to mV
-  return (mV/10 - 50);
+// Read thermistor value for internal temp
+int thermistor(int analog) {
+  long resistance; float temp;
+  
+  resistance = R0/((1023.0/analog)-1);
+  temp = 1.0 / ((1.0/T0) + B*log(resistance/R0));
+  temp-=273.15;
+  
+  return (int)temp; // Return approximate temperature
 }
-
-float gyroRot(int analog) {
-  int mV = map(analog, 0, 1023, 0, 3300); // map to mV
-  return ((float)mV/8.3 - 120.0 - 32.0); // 32.0 is a linear correction I applied...
-}
-
-float gAccel(int analog) {
-  int mV = map(analog, 0, 1023, 0, 3300);
-  return ((float)mV/850.0-1.7);
-}
-
-// Read from a mux pin
-int muxRead(int pin) {
-  int s0, s1, s2, s3;
-  if(pin>0xF || pin<0x0) return -1;
-
-  s0 = (pin & 0x1) >> S0;
-  s1 = (pin & 0x2) >> S1;
-  s2 = (pin & 0x4) >> S2;
-  s3 = (pin & 0x8) >> S3;
-
-  mcp.digitalWrite(S0, s0);
-  mcp.digitalWrite(S1, s1);
-  mcp.digitalWrite(S2, s2);
-  mcp.digitalWrite(S3, s3);
-  delay(10);
-  return analogRead(SIG);
-} */
 
 /* ---- Bunch of functions for BMP180 ---- */
 

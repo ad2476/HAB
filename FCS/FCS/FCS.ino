@@ -1,6 +1,7 @@
 #include "SoftwareSerial.h"
 #include "Wire.h"
 #include "Adafruit_MCP23008.h"
+#include "math.h"
 
 // HAB/Definitions/ is symlinked to sketchbook/libraries/Definitions/
 #include "SerialGSM.h"
@@ -8,6 +9,12 @@
 #include "definitions.h"
 
 unsigned long int time=0; // Running time in seconds
+int state=LOW; // Remember the state of the LED pin
+
+void toggleLED() {
+  digitalWrite(13, state);
+  state=!state;
+}
 
 void setup()
 {
@@ -56,41 +63,24 @@ void loop()
   char databuf[50];
   /*float zrot, x, y, z;
   int freefall; */
-  int alt, t; int32_t b5; // Altitude in m (max error 7m below actual) - from BMP180
+  int alt, t, interior_temp; int32_t b5; // Altitude in m (max error 7m below actual) - from BMP180
         
   // For 15 seconds we parse GPS data and report some key values, and log sensor data every 500ms
   GPS.listen(); // Listen on the GPS software serial
   for (unsigned long start = millis(); millis() - start < 15000;) // The total time of all non-GSM operations must equal 15s
   {    
     if(((millis()-start) % 500) == 0) {
+      toggleLED();
       /* Exterior pressure, temperature data */
       b5 = bmpTemp();
       pressure = calcPressure(b5);
       alt = calcAltitude();
-    
-      /*
-      // Interior temperature data:
-      interior_temp = tmpTemp(muxRead(TMP));
-    
-      // Rotation data:
-      zrot = gyroRot(muxRead(ZX1));
-    
-      // Acceleration data:
-      x = gAccel(muxRead(GX));
-      y = gAccel(muxRead(GY));
-      z = gAccel(muxRead(GZ));
-      freefall = mcp.digitalRead(_0GD); */
       
-      //sprintf(databuf, "\t Exterior:> %d %d | %d | ", pressure, alt, exterior_temp);
-      //Serial.println(databuf); 
-      /*Serial.print(zrot); Serial.print(" | ");
-      Serial.print(x); Serial.print(" ");
-      Serial.print(y); Serial.print(" ");
-      Serial.print(z); Serial.print(" | ");
-      Serial.print(freefall); Serial.println(" end.");*/
+      /* Interior temperature */
+      interior_temp = thermistor(analogRead(THERM));
       
-      Serial.print("\t Exterior:> "); Serial.print(pressure); Serial.print(" "); Serial.print(alt); Serial.print(" | ");
-      Serial.println(exterior_temp);
+      Serial.print("\t Sensors:> "); Serial.print(pressure); Serial.print(" "); Serial.print(alt); Serial.print(" | ");
+      Serial.print(exterior_temp); Serial.print(" "); Serial.println(interior_temp);
     }
     
     while (GPS.available())

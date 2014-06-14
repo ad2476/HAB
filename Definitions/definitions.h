@@ -7,6 +7,7 @@
 #include <TinyGPS.h>
 #include <Wire.h>
 #include "Adafruit_MCP23008.h"
+#include <math.h>
 
 /* --- Serial baud rates --- */
 #define GPSBAUD 9600
@@ -81,9 +82,11 @@ uint16_t ac4, ac5, ac6;
 
 float exterior_temp, pressure; // exterior_temp in hundredths-°C, pressure truncated to mbar
 
-/* --- TMP36 sensor stuff: --- */
-// int interior_temp;
-//extern int tmpTemp(int analog);
+/* Thermistor constants */
+#define B 0.000334448
+
+#define R0 10000.0
+#define T0 298.15
 
 /* --- Gyro stuff --- */
 
