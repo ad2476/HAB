@@ -18,7 +18,7 @@
 /* --- Definitions       --- */
 // When driven high, this pin will powerdown
 // any non-critical devices
-#define SIG A0
+#define THERM A0
 // A1-A3 unused
 // A4 and A5 are reserved for I2C
 
